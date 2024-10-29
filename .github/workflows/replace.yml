@@ -1,0 +1,27 @@
+name: Replace 'dev' with 'sit'
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch if it's different
+
+jobs:
+  replace-word:
+    runs-on: windows-latest  # Use a Windows runner to run PowerShell commands
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Replace 'dev' with 'sit' in text file
+      run: |
+        $filePath = 'path/to/your/document.txt'  # Update with the path to your text document
+        (Get-Content $filePath) -replace 'dev', 'sit' | Set-Content $filePath
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "you@example.com"  # Update with your email
+        git config --local user.name "Your Name"           # Update with your name
+        git add path/to/your/document.txt                   # Update with the path to your text document
+        git commit -m "Replaced 'dev' with 'sit' in document.txt"
+        git push
