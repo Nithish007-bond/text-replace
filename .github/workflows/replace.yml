@@ -3,7 +3,7 @@ name: Replace 'dev' with 'sit'
 on:
   push:
     branches:
-      - main  
+      - test2  
 
 jobs:
   replace-word:
@@ -15,8 +15,10 @@ jobs:
 
     - name: Replace 'dev' with 'sit' in text file
       run: |
-        $filePath = 'sample.txt'  
-        (Get-Content $filePath) -replace 'dev', 'sit' | Set-Content $filePath
-        Get-Content $filePath
+        filePath='sample.txt'
+        wordToReplace='dev'
+        replacementWord='sit'
+        sed -i "s/$wordToReplace/$replacementWord/g" "$filePath"
+        cat "$filePath"
 
     
