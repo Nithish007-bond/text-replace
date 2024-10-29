@@ -26,9 +26,13 @@ jobs:
     - name: Replace words in text file
       run: |
         $filePath = 'sample.txt' 
-        $wordToReplace = '${{ inputs.wordToReplace }}'
-        $replacementWord = '${{ inputs.replacementWord }}'
+        #$wordToReplace = '${{ inputs.wordToReplace }}'
+        #$replacementWord = '${{ inputs.replacementWord }}'
+        $wordToReplace = '${{ github.event.inputs.wordToReplace }}'
+        $replacementWord = '${{ github.event.inputs.replacementWord }}'
         #(Get-Content $filePath) -replace $wordToReplace, $replacementWord | Set-Content $filePath
         (Get-Content $filePath) -replace [regex]::Escape($wordToReplace), $replacementWord | Set-Content $filePath
         Get-Content $filePath
-        
+      env:
+        wordToReplace: ${{ github.event.inputs.wordToReplace }}
+        replacementWord: ${{ github.event.inputs.replacementWord }}
