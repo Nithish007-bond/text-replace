@@ -15,7 +15,7 @@ jobs:
 
     - name: Replace 'dev' with 'sit' in text file
       run: |
-        $filePath = 'sample.txt'  # Update with the path to your text document
+        $filePath = 'sample.txt'  
         (Get-Content $filePath) -replace 'dev', 'sit' | Set-Content $filePath
 
     - name: Commit changes
@@ -24,4 +24,4 @@ jobs:
         git config --local user.name "Nithish007-bond"
         git add sample.txt
         git commit -m "Replaced 'dev' with 'sit' in document.txt"
-        git push https://x-access-token:${{ secrets.myToken }}@github.com/Nithish007-bond/text-replace.git HEAD:main
+        git push https://x-access-token:${{ secrets.MYToken }}@github.com/Nithish007-bond/text-replace.git HEAD:main
