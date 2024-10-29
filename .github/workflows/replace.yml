@@ -33,6 +33,4 @@ jobs:
         #(Get-Content $filePath) -replace $wordToReplace, $replacementWord | Set-Content $filePath
         (Get-Content $filePath) -replace [regex]::Escape($wordToReplace), $replacementWord | Set-Content $filePath
         Get-Content $filePath
-      env:
-        wordToReplace: ${{ github.event.inputs.wordToReplace }}
-        replacementWord: ${{ github.event.inputs.replacementWord }}
+      
