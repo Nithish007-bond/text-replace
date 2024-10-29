@@ -34,10 +34,3 @@ jobs:
         wordToReplace: ${{ github.event.inputs.wordToReplace }}
         replacementWord: ${{ github.event.inputs.replacementWord }}
         
-inputs:
-  wordToReplace:
-    description: 'dev'
-    required: true
-  replacementWord:
-    description: 'SIT'
-    required: true
