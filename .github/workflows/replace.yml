@@ -1,27 +1,33 @@
-name: Replace 'dev' with 'sit'
+name: Replace Words in File
 
 on:
   push:
     branches:
-      - main  
+      - test
 
 jobs:
   replace-word:
-    runs-on: windows-latest  
+    runs-on: windows-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Replace 'dev' with 'sit' in text file
+    - name: Replace words in text file
       run: |
-        $filePath = 'sample.txt'  
-        (Get-Content $filePath) -replace 'dev', 'sit' | Set-Content $filePath
-
-    - name: Commit changes
-      run: |
-        git config --local user.email "anithish644@gmail.com"
-        git config --local user.name "Nithish007-bond"
-        git add sample.txt
-        git commit -m "Replaced 'dev' with 'sit' in document.txt"
-        git push https://x-access-token:${{ secrets.MYToken }}@github.com/Nithish007-bond/text-replace.git HEAD:main
+        $filePath = 'sample.txt' 
+        $wordToReplace = '${{ inputs.wordToReplace }}'
+        $replacementWord = '${{ inputs.replacementWord }}'
+        (Get-Content $filePath) -replace $wordToReplace, $replacementWord | Set-Content $filePath
+        Get-Content $filePath
+      env:
+        wordToReplace: ${{ github.event.inputs.wordToReplace }}
+        replacementWord: ${{ github.event.inputs.replacementWord }}
+        
+inputs:
+  wordToReplace:
+    description: 'dev'
+    required: true
+  replacementWord:
+    description: 'SIT'
+    required: true
