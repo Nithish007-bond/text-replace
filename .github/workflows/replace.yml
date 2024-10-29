@@ -22,6 +22,6 @@ jobs:
       run: |
         git config --local user.email "anithish644@gmail.com"
         git config --local user.name "Nithish007-bond"
-        git add text-replace/sample.txt
+        git add sample.txt
         git commit -m "Replaced 'dev' with 'sit' in document.txt"
         git push https://x-access-token:${{ secrets.myToken }}@github.com/Nithish007-bond/text-replace.git HEAD:main
