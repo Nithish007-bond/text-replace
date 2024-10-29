@@ -28,6 +28,7 @@ jobs:
         $filePath = 'sample.txt' 
         $wordToReplace = '${{ inputs.wordToReplace }}'
         $replacementWord = '${{ inputs.replacementWord }}'
-        (Get-Content $filePath) -replace $wordToReplace, $replacementWord | Set-Content $filePath
+        #(Get-Content $filePath) -replace $wordToReplace, $replacementWord | Set-Content $filePath
+        (Get-Content $filePath) -replace [regex]::Escape($wordToReplace), $replacementWord | Set-Content $filePath
         Get-Content $filePath
         
