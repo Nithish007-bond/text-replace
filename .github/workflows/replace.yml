@@ -1,6 +1,16 @@
 name: Replace Words in File
 
 on:
+  workflow_dispatch:
+    inputs:
+      wordToReplace:
+        description: 'Word to replace'
+        required: true
+        default: 'dev'
+      replacementWord:
+        description: 'Replacement word'
+        required: true
+        default: 'SIT'
   push:
     branches:
       - test
