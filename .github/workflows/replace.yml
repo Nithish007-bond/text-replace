@@ -3,7 +3,7 @@ name: Replace 'dev' with 'sit'
 on:
   push:
     branches:
-      - test2  
+      - test3  
 
 jobs:
   replace-word:
@@ -15,10 +15,18 @@ jobs:
 
     - name: Replace 'dev' with 'sit' in text file
       run: |
-        filePath='sample.txt'
-        wordToReplace='dev'
-        replacementWord='sit'
-        sed -i "s/$wordToReplace/$replacementWord/g" "$filePath"
-        cat "$filePath"
+        filePaths=("sample.txt" "sample1.txt" "sample2.txt")
+        oldString="dev"
+        newString="sit"
+
+        for filePath in "${filePaths[@]}"; do
+          if [ -f "$filePath" ]; then
+            sed -i "s/$oldString/$newString/g" "$filePath"
+            echo "Updated $filePath:"
+            cat "$filePath"
+          else
+            echo "$filePath does not exist."
+          fi
+        done
 
     
